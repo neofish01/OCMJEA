@@ -1,0 +1,196 @@
+<html>
+	<head>
+		<title>Neo Lo - OCMJEA Assignment</title>
+		<style type="text/css">
+			#content {margin: 10px;}
+			#header {width: 500px;}
+			#tblCnt { width: 450px; }
+			#tblCnt td { background:none; }
+			#tblCnt table {margin-bottom:0px;}
+			#content h3 {margin-bottom:4px; margin-top:10px;}
+			.mitigationTitle {font-weight:bold;}
+		</style>
+		<link rel="stylesheet" href="stylesheet.css"></link>
+	</head>
+	<body>
+		<div id="content">
+		<table id="header">
+			<tr>
+				<td>Title</td>
+				<td>Assignment for Oracle Certified Enterprise Architect</td>
+			</tr>
+			<tr>
+				<td>Neo Lo</td>
+				<td>OC1441269</td>
+			</tr>
+			<tr>
+				<td>Document date</td>
+				<td>31 July 2020</td>
+			</tr>
+			<tr>
+				<td>Accompanied documents</td>
+				<td><a href="RetireEarly.pdf">Requirements Document</a><td>
+			</tr>
+			<tr>
+				<td>Notes</td>
+				<td>To view diagrams First 'click to enlarge'</td>
+			</tr>
+		</table>
+		<div id="tblCnt">
+			<h3>Table of Contents</h3>
+			<table>
+				<tr>
+					<td><span>1. <a href="#assumptions">Assumptions</a></span></td>
+				</tr>
+				<tr>
+					<td><span>2. <a href="#sysoverview">Brief System Overview</a></span></td>
+				</tr>
+				<tr>
+					<td><span>3. <a href="#classdiag">Class Diagram</a></span></td>
+				</tr>
+				<tr>
+					<td><span>4. <a href="#compdiag">Component Diagram</a></span></td>
+				</tr>
+				<tr>
+					<td><span>5. <a href="#depdiag">Deployment Diagram</a></span></td>
+				</tr>
+				<tr>
+					<td><span>6. <a href="#seqdiag">Sequence Diagrams</a></span>
+					<table>
+						<tr>
+							<td><span>6.1. <a href="#login">Login</a></span></td>
+						</tr>
+						<tr>
+							<td><span>6.2. <a href="#openAccount">Open Account</a></span></td>
+						</tr>
+						<tr>
+							<td><span>6.3. <a href="#reviewAccount">Review Account</a></span></td>
+						</tr>
+						<tr>
+							<td><span>6.4. <a href="#priceAsset">Price Asset</a></span></td>
+						</tr>
+						<tr>
+							<td><span>6.5. <a href="#transferFunds">Transfer Funds</a></span></td>
+						</tr>
+						<tr>
+							<td><span>6.6. <a href="#buyAsset">Buy Asset</a></span></td>
+						</tr>
+						<tr>
+							<td><span>6.7. <a href="#sellAsset">Sell Asset</a></span></td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+				<tr>
+					<td><span>7. <a href="#riskmit">Risks and Mitigations</a></span></td>
+				</tr>
+			</table>
+		</div>
+		<div id="assumptions">
+			<a name="assumptions"></a><h3>1. Assumptions</h3>
+			<ul>
+				<li>Customer do buying or selling must choose an account first.</li>
+				<li>Every holding will contains only one asset and one cash.</li>
+				<li>The cash is this asset's historical buying price .</li>
+				<li>Holdings can only have cash and no any asset.</li>
+				<li>Customer can pay as any currency, Retire Early will transfer to USD, so I keep rate and currency in table.</li>
+				<li>It's not mentioned that Retire Early provide all kind of stocks, mutual funds and bonds or just one product every asset, so I assume this system will provide all kind of products and use Value Object to keep every kind of any asset.</li>
+				<li>Merchant Bank will handle transfer and validate if lock-up period is over or not.</li>
+			</ul>	
+		</div>
+		<div id="sysoverview">
+			<a name="sysoverview"></a><h3>2. Brief System Overview</h3>
+			<li>Retire Early system was designed as a Java Enterprise application accessible by customer through web browser.</li> 
+			<li>System was designed to be highly available across North America, Europe, Asia with data centres located on those three continents.</li> 
+			Provided design allows it to work on 'commodity' computers, not needing any expensive infrastructure.</li> 
+			<li>JMS server is standalone to retrieve the lates price of all products from PriceRight. Even one server is down, the other will take over immediately.</li>
+			<li>Use Primefaces as JSF implementation. The AccountManagerBean calculate the portfolio breakdown and use tagLib to draw charts like pie/ bar chart…etc.</li>
+			<li>To provide high availability, Retire Early adapts web server cluster, application server cluster and data base cluster. Any parts can be scale up vertically by higher performance hardware. Use DNS as load balancer to make sure load balance. The transaction will be done within 5 seconds, and all account details will be shown with 8 seconds.</li>
+			<li>Customers must use HTTPS protocol to access Retire Early, and the browser must support 128-Bit Encryption or higher..</li>
+		</div>
+		<div id="classdiag">
+			<a name="classdiag"></a><h3>3. Class Diagram</h3>
+			<a href="class_diagram.jpg"><img src="class_diagram.jpg" style="width:900px;"/></a><br/>
+			<a href="class_diagram.jpg">Click to enlarge</a>
+		</div>
+		<div id="compdiag">
+			<a name="compdiag"></a><h3>4. Component Diagram</h3>
+			<a href="component_diagram.jpg"><img src="component_diagram.jpg" style="width:900px;" /></a><br/>
+			<a href="component_diagram.jpg">Click to enlarge</a>
+		</div>
+		<div id="depdiag">
+			<a name="depdiag"></a><h3>5. Deployment Diagram</h3>		
+			<a href="deployment_diagram.jpg"><img src="deployment_diagram.jpg" style="width:900px;"/></a><br/>
+		</div>
+		<div id="seqdiag">
+			<a name="seqdiag"></a><h3>6. Sequence Diagrams</h3>
+			<div id="login">
+				<a name="login"></a><h4>6.1. Login</h4>
+				<a href="login_seq_diagram.jpg"><img src="login_seq_diagram.jpg" style="width:900px;"/></a><br/>
+				<a href="login_seq_diagram.jpg">Click to enlarge</a>
+			</div>
+			<div id="openAccount">
+				<a name="openAccount"></a><h4>6.2. Open Account</h4>
+				<a href="open_account_seq_diagram.jpg"><img src="open_account_seq_diagram.jpg" style="width:900px;"/></a><br/>
+				<a href="open_account_seq_diagram.jpg">Click to enlarge</a>
+			</div>
+			<div id="reviewAccount">
+				<a name="reviewAccount"></a><h4>6.3. Review Account</h4>
+				<a href="review_account_seq_diagram.jpg"><img src="review_account_seq_diagram.jpg" style="width:900px;"/></a><br/>
+				<a href="review_account_seq_diagram.jpg">Click to enlarge</a>
+			</div>
+			<div id="priceAsset">
+				<a name="priceAsset"></a><h4>6.4. Price Asset</h4>
+				<a href="price_asset_seq_diagram.jpg"><img src="price_asset_seq_diagram.jpg" style="width:900px;"/></a><br/>
+				<a href="price_asset_seq_diagram.jpg">Click to enlarge</a>
+			</div>
+			<div id="transferFunds">
+				<a name="transferFunds"></a><h4>6.5. Transfer Funds</h4>
+				<a href="transfer_funds_seq_diagram.jpg"><img src="transfer_funds_seq_diagram.jpg" style="width:900px;"/></a><br/>
+				<a href="transfer_funds_seq_diagram.jpg">Click to enlarge</a>
+			</div>
+			<div id="buyAsset">
+				<a name="buyAsset"></a><h4>6.6. Buy Asset</h4>
+				<a href="buy_asset_seq_diagram.jpg"><img src="buy_asset_seq_diagram.jpg" style="width:900px;"/></a><br/>
+				<a href="buy_asset_seq_diagram.jpg">Click to enlarge</a>
+			</div>
+			<div id="sellAsset">
+				<a name="sellAsset"></a><h4>6.7. Sell Asset</h4>
+				<a href="sell_asset_seq_diagram.jpg"><img src="sell_asset_seq_diagram.jpg" style="width:900px;"/></a><br/>
+				<a href="sell_asset_seq_diagram.jpg">Click to enlarge</a>
+			</div>
+		</div>
+		<div id="riskmit">
+			<a name="riskmit"></a><h3>7. Risks and Mitigations</h3>
+			<ul>
+				<li>
+					More customer can join Retire Early.<br/>
+					<div class="mitigation"><span class="mitigationTitle">Mitigation:</span> Provided architecture allows both vertical as well as horizontal scaling. In case of experienced slowness in clustered database due to increased number of active users. To separate I/O DB is a good solution.</div>
+				</li>
+				<li>
+					Customer cannot do transaction across different continents.<br/>
+					<div class="mitigation"><span class="mitigationTitle">Mitigation:</span> Because of every continent has its own hardware and database is standalone. If Retire Early want to share customer data, then doing batch job to synchronize data at off-peak time is a good idea.</div>
+				</li>
+				<li>
+					Security issues.
+					1.Man in the middle attacks
+					2.Phising
+					3.DNS spoofing
+					<div class="mitigation"><span class="mitigationTitle">Mitigation:</span> Using mutual SSL for external communication. Encrypts and authenticates both parties.Retire Early certificate must be granted by a certification authority </div> 
+				</li>
+				<li>
+					Security issues.
+					1.Man in the middle attacks
+					2.Phising
+					3.DNS spoofing
+					<div class="mitigation"><span class="mitigationTitle">Mitigation:</span> Using mutual SSL for external communication. Encrypts and authenticates both parties.Retire Early certificate must be granted by a certification authority </div> 
+				</li>
+				<li>
+					Cracked/ steal password
+					<div class="mitigation"><span class="mitigationTitle">Mitigation:</span> Use Multi-factor authentication like email/ mobile app/ SSL code. </div> 
+				</li>
+			</ul>
+		</div>
+		</div>
+	</body>
+</html>
